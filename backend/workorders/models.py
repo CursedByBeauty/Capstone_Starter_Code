@@ -1,7 +1,7 @@
 from random import choices
 from django.db import models
 from django.forms import CharField
-from authentication.models import resident
+
 
 # Create your models here.
 
@@ -27,7 +27,7 @@ class Workorders(models.Model):
     ]
 
     resident = models.CharField(max_length=30)
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     unit = models.IntegerField()
     subject = models.CharField(max_length=50)
     comments = models.CharField(max_length=255)
