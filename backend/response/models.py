@@ -1,15 +1,15 @@
 from datetime import date
 from sqlite3 import Date
 from django.db import models
-from backend.workorders.models import Workorders
+from workorders.models import Workorders
 
 
 # Create your models here.
 
 
-class Response(models.Models):
+class Response(models.Model):
 
-    workorder = models.ForeignKey(Workorders)
+    workorder = models.ForeignKey(Workorders,on_delete=models.CASCADE)
     worker = models.CharField(max_length=30)
     date = models.DateField()
     comments = models.CharField(max_length=255)
