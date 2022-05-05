@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
     'workorders',
-    'response',
+    'worker_response',
     'cars.apps.CarsConfig'  # This app is for example use only
 ]
 

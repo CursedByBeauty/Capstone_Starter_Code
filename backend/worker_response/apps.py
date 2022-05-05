@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ResponseConfig(AppConfig):
+class WorkerResponseConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'response'
+    name = 'worker_response'
