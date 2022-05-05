@@ -1,3 +1,4 @@
+import re
 from .models import Workorders
 from .serializers import WorkorderSerializers
 from modulefinder import IMPORT_NAME
@@ -22,11 +23,17 @@ def get_all_workorders(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
 def workorder_details(request,pk):
     # GETTING A WORKORDER BY THE PK
+    workorder = get_object_or_404(Workorders, pk=pk)
     if request.method == 'GET':
-        workorder = get_object_or_404(Workorders, pk=pk)
         serializer = WorkorderSerializers(workorder)
         return Response(serializer.data, status.HTTP_200_OK)
+    elif request.method == 'PUT':
+        serializer = WorkorderSerializers(workorder, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status.HTTP_202_ACCEPTED)
+
