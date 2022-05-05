@@ -25,6 +25,7 @@ def get_all_workorders(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def workorder_details(request,pk):
+    # GETTING A WORKORDER BY THE PK
     if request.method == 'GET':
         workorder = get_object_or_404(Workorders, pk=pk)
         serializer = WorkorderSerializers(workorder)
