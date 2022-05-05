@@ -36,3 +36,4 @@ class Workorders(models.Model):
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default= 'I')
 
     
+
