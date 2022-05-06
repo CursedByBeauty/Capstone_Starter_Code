@@ -20,11 +20,6 @@ class Workorders(models.Model):
         ('None', 'No Priority'),
     ]
 
-    STATUS_CHOICES = [
-        ('I', 'Incomplete'),
-        ('H', 'On Hold'),
-        ('C', 'Complete'),
-    ]
 
     resident = models.CharField(max_length=30)
     date = models.DateTimeField(auto_now_add=True)
@@ -33,7 +28,6 @@ class Workorders(models.Model):
     comments = models.CharField(max_length=255)
     entry = models.CharField(max_length=30, choices=ENTRY_CHOICES, default='Enter')
     priority = models.CharField(max_length=15, choices=PRIORITY_CHOICES, default='None')
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default= 'I')
 
     
 

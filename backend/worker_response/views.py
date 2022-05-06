@@ -1,3 +1,4 @@
+
 from .models import WorkerResponse
 from .serializers import WorkerResponseSerializer
 from modulefinder import IMPORT_NAME
@@ -10,27 +11,29 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def workorders_list(request):
-    if request.method == 'POST':
-        serializer = WorkerResponseSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-        
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def workorders_detail(request, pk):
-    task = get_object_or_404(Workorders, pk=pk)
+def get_all_responses(request):
     if request.method == 'GET':
-        serializer = WorkerResponseSerializer(task)
-        return Response(serializer.data)
+        # GETS ALL THE RESPONSES IN THE TABLE
+        response = WorkerResponse.objects.all()
+        serializer = WorkerResponseSerializer(response, many = True)
+        return Response(serializer.data, status.HTTP_200_OK)
+    elif request.method == 'POST':
+        # MAINTENANCE FEATURE TO ADD A NEW RESPONSE
+        serializer = WorkerResponseSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True): 
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        
+
+@api_view(['GET', 'PUT'])
+def response_details(request, pk):
+    response = get_object_or_404(WorkerResponse, pk=pk)
+    if request.method == 'GET':
+        serializer = WorkerResponseSerializer(response)
+        return Response(serializer.data, status.HTTP_200_OK)
     elif request.method == 'PUT': 
-        serializer = WorkerResponseSerializer(Workorders, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-    elif request.method == 'DELETE':
-        task.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        serializer = WorkerResponseSerializer(response, data=request.data)
+        if serializer.is_valid(raise_exception=True): 
+            serializer.save()
+            return Response(serializer.data)

@@ -1,4 +1,4 @@
-import re
+
 from .models import Workorders
 from .serializers import WorkorderSerializers
 from modulefinder import IMPORT_NAME
@@ -16,7 +16,7 @@ def get_all_workorders(request):
         workorders = Workorders.objects.all().order_by('priority')
         serializer = WorkorderSerializers(workorders, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    # CREATES A WORKORDER
+    # TENTANT FEATURE TO CREATE A WORKORDER
     elif request.method == 'POST':
         serializer = WorkorderSerializers(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -32,6 +32,7 @@ def workorder_details(request,pk):
         serializer = WorkorderSerializers(workorder)
         return Response(serializer.data, status.HTTP_200_OK)
     elif request.method == 'PUT':
+        # UPDATING A WORKORDER BY THE PK
         serializer = WorkorderSerializers(workorder, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
