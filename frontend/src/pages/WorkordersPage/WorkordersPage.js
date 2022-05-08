@@ -8,23 +8,21 @@ const WorkordersPage = (props) => {
     
   
     useEffect(() => {
+      const getAllTickets = async () => {
+        try {
+          let response = await axios.get("http://127.0.0.1:8000/api/workorders/", {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          });
+          setTickets(response.data);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
       getAllTickets();
-    }, []);
+    }, [token]);
   
-    async function getAllTickets() {
-      try {
-        let response = await axios.get("http://127.0.0.1:8000/api/workorders/",{
-          headers: {
-            Authorization: "Bearer " + token
-          }
-        });
-        setTickets(response.data);
-        console.log(tickets)
-      }
-      catch (error){
-        console.log(error.message)
-      }
-    }
     return ( 
         <div>
             <DisplayWorkorders tickets={tickets}/>
