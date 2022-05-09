@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     path('',views.get_all_workorders),
-    path('<int:pk>/', views.workorder_details)
+    path('<int:pk>/', views.workorder_details),
+    path('<int:pj>/status/', views.update_status)
 ]

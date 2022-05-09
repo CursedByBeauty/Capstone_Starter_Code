@@ -27,6 +27,7 @@ def get_all_responses(request):
         
 
 @api_view(['GET', 'PUT'])
+@permission_classes([IsAuthenticated])
 def response_details(request, pk):
     response = get_object_or_404(WorkerResponse, pk=pk)
     if request.method == 'GET':

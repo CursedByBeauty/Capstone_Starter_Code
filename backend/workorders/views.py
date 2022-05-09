@@ -23,7 +23,7 @@ def get_all_workorders(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'PUT','PATCH'])
 @permission_classes([IsAuthenticated])
 def workorder_details(request,pk):
     # GETTING A WORKORDER BY THE PK
@@ -38,3 +38,12 @@ def workorder_details(request,pk):
             serializer.save()
             return Response(serializer.data, status.HTTP_202_ACCEPTED)
 
+@api_view(['PATCH'])
+@permission_classes([AllowAny])
+def update_status(request,pk):
+    if request.method == 'PATCH':
+        workorder = get_object_or_404(Workorders, pk=pk)
+        serializer = WorkorderSerializers(workorder, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_202_ACCEPTED)
