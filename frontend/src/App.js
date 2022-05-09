@@ -22,7 +22,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<PrivateRoute><WorkordersPage/></PrivateRoute>}/>
-        <Route path="/response/:ticketId/" element={<PrivateRoute><ResponsePage/></PrivateRoute>}/>
+        <Route path="/response/:ticketId/" element={<ResponsePage/>}/>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>

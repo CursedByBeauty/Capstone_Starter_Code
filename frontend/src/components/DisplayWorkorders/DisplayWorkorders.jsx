@@ -14,26 +14,31 @@ const DisplayWorkorders = (props) => {
             <th scope="col">Permission to Enter</th>
             <th scope="col">Comments</th>
             <th scope="col">Status</th>
+            <th scope="col">Update Ticket</th>
           </tr>
         </thead>
         <tbody>
           {props.tickets.map((order) => {
-            return (
-              <tr key={order.id}>
-                <td>{order.date}</td>
-                <td>{order.resident}</td>
-                <td>{order.unit}</td>
-                <td>{order.subject}</td>
-                <td>{order.priority}</td>
-                <td>{order.entry}</td>
-                <td>{order.comments}</td>
-                <td>
-                  <Link to= {`/response/${order.id}/`}>
-                    <button>Fill Out Ticket</button>
-                  </Link>
-                </td>
-              </tr>
-            );
+            // Gave a condition to only display the incomplete and on hold
+            if (order.status === "I" || order.status === "H") {
+              return (
+                <tr key={order.id}>
+                  <td>{order.date}</td>
+                  <td>{order.resident}</td>
+                  <td>{order.unit}</td>
+                  <td>{order.subject}</td>
+                  <td>{order.priority}</td>
+                  <td>{order.entry}</td>
+                  <td>{order.comments}</td>
+                  <td>{order.status}</td>
+                  <td>
+                    <Link to={`/response/${order.id}/`}>
+                      <button>Fill Out Ticket</button>
+                    </Link>
+                  </td>
+                </tr>
+              );
+            }
           })}
         </tbody>
       </table>

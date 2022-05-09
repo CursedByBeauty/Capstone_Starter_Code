@@ -15,10 +15,11 @@ const ResponseForm = (props) => {
   const [solution, setSolution] = useState("");
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
+
   async function addResponse(workerResponse) {
     //   Calling the url used to create a new response and adding the new response which is workerResponse
     try {
-      let response = await axios.post(
+      await axios.post(
         "http://127.0.0.1:8000/api/responses/",
         workerResponse,
         {
@@ -28,9 +29,22 @@ const ResponseForm = (props) => {
         }
       );
       alert("Response has been submitted successfully");
-      navigate("/");
     } catch (error) {
       console.log(workerResponse);
+      alert("Invalid entry try again")
+      console.log(error.message);
+    }
+  }
+// Call the PATCH REQUEST to update the status in the workorder table
+  async function updateStatus(newStatus, pk) {
+    try {
+      await axios.patch(
+        `http://127.0.0.1:8000/api/workorders/${pk}/status/`,
+        newStatus);
+      alert("Status has been updated")
+      navigate("/");
+    } catch (error) {
+      console.log(newStatus);
       alert("Invalid entry try again")
       console.log(error.message);
     }
@@ -38,14 +52,22 @@ const ResponseForm = (props) => {
 
   function handleClick(event) {
     event.preventDefault();
+    // Provided the body for the POST request to create a new Response
     let newResponse = {
       worker: worker,
       date: date,
       comments: solution,
       workorder_id: parseInt(ticketId),
-      status: status,
     };
+    // Provided the body for the PATCH request to update status
+    let currentStatus = {
+      status: status
+    }
+    // Providing the arguments for the Add response function and calling 
     addResponse(newResponse);
+    // Providing the arguments for the update Status function and calling
+    updateStatus(currentStatus, parseInt(ticketId))
+    // Setting values back to their initial state which is empty
     setDate("");
     setWorker("");
     setSolution("");
@@ -72,7 +94,7 @@ const ResponseForm = (props) => {
         />
         <label>Status</label>
         <input
-          placeholder="C: Complete,H: Hold"
+          placeholder="C: Complete, H: Hold"
           value={status}
           onChange={(event) => setStatus(event.target.value)}
         />
