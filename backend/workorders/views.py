@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 def get_all_workorders(request):
     # GETS ALL WORKORDERS 
     if request.method == 'GET':
-        workorders = Workorders.objects.all().order_by('priority')
+        workorders = Workorders.objects.all()
         serializer = WorkorderSerializers(workorders, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     # TENTANT FEATURE TO CREATE A WORKORDER
@@ -23,7 +23,7 @@ def get_all_workorders(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['GET', 'PUT','PATCH'])
+@api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
 def workorder_details(request,pk):
     # GETTING A WORKORDER BY THE PK
