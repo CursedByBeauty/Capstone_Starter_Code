@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-
+import DisplayWorkorders from "../DisplayWorkorders/DisplayWorkorders";
 const ResponseForm = (props) => {
   // Token hook
   const [user, token] = useAuth();
@@ -15,7 +15,28 @@ const ResponseForm = (props) => {
   const [solution, setSolution] = useState("");
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
+  // VARIABLE WHERE THE CURRENT WORKORDER WILL BE SET 
+  const [currentWorkorder, setCurrentWorkorder] = useState([])
 
+useEffect(() => {
+  // ON MOUNTING CALLING THE FUNCTION TO GET THE CURRENT WORKORDER SO IT CAN DISPLAY THE MINUTE I OPEN THE RESPONSE PAGE
+  getWorkorderById(ticketId)
+},[])
+// getting the CURRENT WORKORDER BY THE ID WHICH IS THE TICKETID
+  async function getWorkorderById(pk) {
+    try {
+      let response = await axios.get(`http://127.0.0.1:8000/api/workorders/${pk}/`,{
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      // Setting the current workorder to equal the current ticket we clicked
+      setCurrentWorkorder([response.data])
+    }
+    catch (error) {
+      console.log(error.message)
+    }
+  }
   async function addResponse(workerResponse) {
     //   Calling the url used to create a new response and adding the new response which is workerResponse
     try {
@@ -35,6 +56,10 @@ const ResponseForm = (props) => {
       console.log(error.message);
     }
   }
+
+
+
+
 // Call the PATCH REQUEST to update the status in the workorder table
   async function updateStatus(newStatus, pk) {
     try {
@@ -42,13 +67,15 @@ const ResponseForm = (props) => {
         `http://127.0.0.1:8000/api/workorders/${pk}/status/`,
         newStatus);
       alert("Status has been updated")
-      navigate("/");
+      navigate("/maintenance");
     } catch (error) {
       console.log(newStatus);
       alert("Invalid entry try again")
       console.log(error.message);
     }
   }
+
+
 
   function handleClick(event) {
     event.preventDefault();
@@ -73,6 +100,8 @@ const ResponseForm = (props) => {
     setSolution("");
     setStatus("");
   }
+
+
   return (
     <div>
       <form onSubmit={handleClick}>
@@ -100,6 +129,10 @@ const ResponseForm = (props) => {
         />
         <button type="submit">Submit</button>
       </form>
+      <div>
+      {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
+        <DisplayWorkorders tickets = {currentWorkorder}/>
+      </div>
     </div>
   );
 };
