@@ -20,6 +20,7 @@ const ResponseForm = (props) => {
 
 useEffect(() => {
   // ON MOUNTING CALLING THE FUNCTION TO GET THE CURRENT WORKORDER SO IT CAN DISPLAY THE MINUTE I OPEN THE RESPONSE PAGE
+  // Passing in the Parameters ticketId which is the current ticket pk
   getWorkorderById(ticketId)
 },[])
 // getting the CURRENT WORKORDER BY THE ID WHICH IS THE TICKETID
