@@ -1,6 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const ResidentForm = (props) => {
+  const [user, token] = useAuth();
   const [resident, setResident] = useState(props.user.username);
   const [unit, setUnit] = useState("");
   const [subject, setSubject] = useState("");
@@ -19,14 +22,34 @@ const ResidentForm = (props) => {
       priority: priority.toUpperCase(),
     };
     console.log(newTicket);
+    addTicket(newTicket);
+    setUnit("")
+    setSubject("")
+    setComment("")
+    setEntry("")
+    setPriority("")
   }
 
-//   async function addTicket(newTicket){
-//     //   axios POST REQUEST to create a workorder
-//     // use the correct url 
-//     // add the newTicket to the url and also add the token
-//   }
+  async function addTicket(workorder) {
+    try {
+      await axios.post("http://127.0.0.1:8000/api/workorders/", workorder, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
+      alert(
+        "Thank you for filling out your request! You should get an email with any updates."
+      );
+      props.getAllTickets();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  //     // axios POST REQUEST to create a workorder
+  //     // use the correct url
+  //     // add the newTicket to the url and also add the token
 
   return (
     <div>
@@ -51,7 +74,7 @@ const ResidentForm = (props) => {
         <label>Priority</label>
         <input
           value={priority}
-          style={{width: "17rem"}}
+          style={{ width: "17rem" }}
           placeholder="H for High, M for Medium, L for Low"
           onChange={(event) => setPriority(event.target.value)}
         />

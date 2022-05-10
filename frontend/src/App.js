@@ -23,34 +23,32 @@ function App() {
   const [user, token] = useAuth();
   const [tickets, setTickets] = useState([]);
 
-  useEffect(
-    (props) => {
-      const getAllTickets = async () => {
-        try {
-          let response = await axios.get(
-            "http://127.0.0.1:8000/api/workorders/",
-            {
-              headers: {
-                Authorization: "Bearer " + token,
-              },
-            }
-          );
-          setTickets(response.data);
-        } catch (error) {
-          console.log(error.message);
-          console.log(tickets);
-        }
-      };
-      getAllTickets();
-    },
-    [token]
-  );
+  useEffect(() => {
+    getAllTickets();
+  }, [token]);
+
+  const getAllTickets = async () => {
+    try {
+      let response = await axios.get("http://127.0.0.1:8000/api/workorders/", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      setTickets(response.data);
+    } catch (error) {
+      console.log(error.message);
+      console.log(tickets);
+    }
+  };
 
   return (
     <div className="page">
       <Navbar />
       <Routes>
-        <Route path="/" element={<PortalChoicePage />} />
+        <Route
+          path="/"
+          element={<PortalChoicePage  />}
+        />
         <Route
           path="/maintenance"
           element={
@@ -63,7 +61,7 @@ function App() {
           path="/resident"
           element={
             <PrivateRoute>
-              <ResidentPage />
+              <ResidentPage getAllTickets={getAllTickets}/>
             </PrivateRoute>
           }
         />
