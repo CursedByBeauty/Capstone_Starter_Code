@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import DisplayWorkorders from "../DisplayWorkorders/DisplayWorkorders";
 import SendEmail from "../SendEmail/SendEmail";
+import "./ResponseForm.css";
 import { Link } from "react-router-dom";
 const ResponseForm = (props) => {
   // Token hook
@@ -93,36 +94,64 @@ const ResponseForm = (props) => {
     setDate("");
     setWorker("");
     setSolution("");
-    setStatus(""); 
+    setStatus("");
   }
 
   return (
     <div>
-      <form onSubmit={handleClick}>
-        <label>Worker</label>
-        <input
-          value={worker}
-          onChange={(event) => setWorker(event.target.value)}
-        />
-        <label>Date Completed</label>
-        <input
-          placeholder="yyyy-mm-dd"
-          value={date}
-          onChange={(event) => setDate(event.target.value)}
-        />
-        <label>Comment</label>
-        <input
-          value={solution}
-          onChange={(event) => setSolution(event.target.value)}
-        />
-        <label>Status</label>
-        <input
-          placeholder="C: Complete, H: Hold"
-          value={status}
-          onChange={(event) => setStatus(event.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+      <div className="around-form">
+        <form onSubmit={handleClick}>
+          <div className="form-layout">
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroup-sizing-sm">
+                  Worker
+                </span>
+                <input
+                  value={worker}
+                  onChange={(event) => setWorker(event.target.value)}
+                />
+              </div>
+            </div>
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroup-sizing-sm">
+                  Date Completed
+                </span>
+                <input
+                  placeholder="yyyy-mm-dd"
+                  value={date}
+                  onChange={(event) => setDate(event.target.value)}
+                />
+              </div>
+            </div>
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroup-sizing-sm">
+                  Comment
+                </span>
+                <input
+                  value={solution}
+                  onChange={(event) => setSolution(event.target.value)}
+                />
+              </div>
+            </div>
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroup-sizing-sm">
+                  Status
+                </span>
+                <input
+                  placeholder="C: Complete, H: Hold"
+                  value={status}
+                  onChange={(event) => setStatus(event.target.value)}
+                />
+              </div>
+            </div>
+            <button type="submit">Submit</button>{" "}
+          </div>
+        </form>{" "}
+      </div>
       <div>
         {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
         <DisplayWorkorders tickets={currentWorkorder} />
@@ -132,7 +161,9 @@ const ResponseForm = (props) => {
       </div>
       <div>
         <Link to="/maintenance">
-          <button>Maintenance Home Page</button>
+          <div class="col-md-12 text-center">
+            <button>Maintenance Home Page</button>
+          </div>
         </Link>
       </div>
     </div>

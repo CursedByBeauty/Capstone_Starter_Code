@@ -1,0 +1,5 @@
+.col-lg-12.text-center {
+    padding-bottom: 50px;
+    display:flex;
+    justify-content: space-evenly;
+}

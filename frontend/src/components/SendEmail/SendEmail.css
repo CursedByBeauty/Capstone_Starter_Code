@@ -1,5 +1,12 @@
 
 .form-group {
-    width: 500px;
+    width:400px;
+    margin: 0 auto;
+  
 }
+.btn-primary {
+margin-top: 1rem;
+}
+
+
 
