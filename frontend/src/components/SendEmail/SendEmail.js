@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import {KEY, KEY2} from "./../../localKey"
+
 const SendEmail = () => {
-  const form = useRef();
 
   function sendEmail (e) {
     e.preventDefault()
@@ -13,6 +13,8 @@ const SendEmail = () => {
           console.log(error.text);
       });
       e.target.reset()
+      alert("Email Sent")
+      
   };
 
   return (
@@ -22,7 +24,7 @@ const SendEmail = () => {
       <label>Email</label>
       <input type="email" name="email" />
       <label>Message</label>
-      <textarea name="message" />
+     <input type="text" name="message"/>
      <button>Send Message</button>
     </form>
   );
