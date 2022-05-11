@@ -1,10 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import useAuth from "../../hooks/useAuth";
 
 const ResidentForm = (props) => {
-  const [user, token] = useAuth();
-  const [resident, setResident] = useState(props.user.username);
   const [unit, setUnit] = useState("");
   const [subject, setSubject] = useState("");
   const [comment, setComment] = useState("");
@@ -14,7 +11,7 @@ const ResidentForm = (props) => {
   function handleClick(event) {
     event.preventDefault();
     let newTicket = {
-      resident: resident,
+      resident: props.user.username,
       unit: parseInt(unit),
       subject: subject,
       comments: comment,
@@ -34,7 +31,7 @@ const ResidentForm = (props) => {
     try {
       await axios.post("http://127.0.0.1:8000/api/workorders/", workorder, {
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: "Bearer " + props.token,
         },
       });
 
