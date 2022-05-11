@@ -37,7 +37,7 @@ const SendEmail = () => {
           placeholder="Write your message here."
           rows="4"
         ></textarea>{" "} 
-        <div class="col-md-12 text-center">
+        <div className="col-md-12 text-center">
         <button className="btn-primary" >Send Message</button>
         </div>
       </div>{" "}

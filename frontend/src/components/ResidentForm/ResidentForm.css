@@ -3,3 +3,7 @@
     display:flex;
     justify-content: space-evenly;
 }
+
+.inputGroup-sizing-sm {
+    width: 100px;
+}

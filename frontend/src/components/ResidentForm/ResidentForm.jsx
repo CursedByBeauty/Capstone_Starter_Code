@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import "./ResidentForm.css"
+import "./ResidentForm.css";
 
 const ResidentForm = (props) => {
   const [unit, setUnit] = useState("");
@@ -52,64 +52,72 @@ const ResidentForm = (props) => {
   return (
     <div>
       <div className="col-lg-12 text-center">
-      <form onSubmit={handleClick}>
-        <div className="input-group input-group-sm mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="inputGroup-sizing-sm">
-              Unit
-            </span>
-            <input
-              value={unit}
-              onChange={(event) => setUnit(event.target.value)}
-            />
+        <form onSubmit={handleClick}>
+          <div className="input-group input-group-sm mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                Unit
+              </span>
+              <input
+                style={{ width: "17rem" }}
+                value={unit}
+                onChange={(event) => setUnit(event.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        <div className="input-group input-group-sm mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="inputGroup-sizing-sm">
-              Subject
-            </span>
-            <input
-              value={subject}
-              onChange={(event) => setSubject(event.target.value)}
-            />
+          <div className="input-group input-group-sm mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                Subject
+              </span>
+              <input
+                style={{ width: "17rem" }}
+                value={subject}
+                onChange={(event) => setSubject(event.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        <div className="input-group input-group-sm mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="inputGroup-sizing-sm">
-              Comment
-            </span>
-            <input
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
-            />
+          <div className="input-group input-group-sm mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                Comment
+              </span>
+              <input
+                style={{ width: "17rem" }}
+                value={comment}
+                onChange={(event) => setComment(event.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        <div className="input-group input-group-sm mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="inputGroup-sizing-sm">
-              Permission to Enter
-            </span>
-            <input
-              value={entry}
-              onChange={(event) => setEntry(event.target.value)}
-            />
+          <div className="input-group input-group-sm mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                Permission to Enter
+              </span>
+              <div className="input-group">
+              <select style={{width: "17rem"}}className="custom-select" id="inputGroupSelect04" onChange={(event)=> setEntry(event.target.value)}>
+                <option value="Call">Call</option>
+                <option value="Enter">Enter</option>
+              </select>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="input-group input-group-sm mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="inputGroup-sizing-sm">
-              Priority
-            </span>
-        <input
-          value={priority}
-          style={{ width: "17rem" }}
-          placeholder="H for High, M for Medium, L for Low"
-          onChange={(event) => setPriority(event.target.value)}
-        /></div></div>
-        <button>Submit Ticket</button>
-      </form>
+          <div className="input-group input-group-sm mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                Priority
+              </span>
+              <div className="input-group">
+              <select style={{width: "17rem"}}className="custom-select" id="inputGroupSelect04" onChange={(event)=> setPriority(event.target.value)} >
+                <option value="H">High</option>
+                <option value="M">Medium</option>
+                <option value="L">Low</option>
+              </select>
+            </div>
+          </div>
+          </div>
+          <button>Submit Ticket</button>
+        </form>
       </div>
     </div>
   );
