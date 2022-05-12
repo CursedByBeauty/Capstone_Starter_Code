@@ -18,6 +18,7 @@ import Footer from "./components/Footer/Footer";
 import ResponsePage from "./pages/ResponsePage/ResponsePage";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import DisplayCompleted from "./components/DisplayCompleted/DisplayCompleted";
 
 function App() {
   const [user, token] = useAuth();
@@ -71,6 +72,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/completed" element={<DisplayCompleted tickets = {tickets}/>}/>
       </Routes>
       <Footer />
   
