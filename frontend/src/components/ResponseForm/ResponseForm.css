@@ -1,21 +1,21 @@
 form {
-
     margin: 0 auto;
   
 }
-.form-layout {
+.layout {
     display:flex;
     justify-content: space-evenly;
 }
-.around-form {
-    padding-right: 30rem;
-    padding-left: 30rem;
-}
+
 
 .col-md-12.text-center {
     padding-bottom: 10%;
+    margin-top:1rem;
 }
 
 .col-lg-12.text-center {
     padding-bottom: 50px;
+}
+.input-group {
+    justify-content: center;
 }

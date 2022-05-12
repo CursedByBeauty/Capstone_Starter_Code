@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 import emailjs from "@emailjs/browser";
 import "./SendEmail.css";
 import { KEY, KEY2 } from "./../../localKey";
 
-const SendEmail = () => {
+const SendEmail = (props) => {
   function sendEmail(e) {
     e.preventDefault();
     emailjs.sendForm(`${KEY2}`, "template_11qgmnq", e.target, `${KEY}`).then(
@@ -19,30 +19,44 @@ const SendEmail = () => {
   }
 
   return (
-    <form onSubmit={sendEmail}>
-      <div className="form-group">
-        <label>Name</label>
-        <input className="form-control" type="text" name="name" />{" "}
-      </div>
-      <div className="form-group">
-        <label>Email</label>
-        <input className="form-control" type="email" name="email" />
-      </div>
-      <div className="form-group">
-        <label>Message</label>
-        <textarea
-          type="message"
-          name="message"
-          className="form-control"
-          placeholder="Write your message here."
-          rows="4"
-        ></textarea>{" "} 
-        <div className="col-md-12 text-center">
-        <button className="btn-primary" >Send Message</button>
+    <div className="around-form">
+      <form onSubmit={sendEmail}>
+        
+        <div className="input-group input-group-sm mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-sm">
+              Name
+            </span>
+            <input style={{width: "17rem"}} type="text" name="name" />{" "}
+          </div>
         </div>
-      </div>{" "}
-     
-    </form>
+        <div className="input-group input-group-sm mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-sm">
+              Email
+            </span>
+            <input style={{width: "17rem"}}  type="email" name="email" />
+          </div>
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-sm">
+              Message
+            </span>
+            <textarea
+              style={{width: "17rem"}}
+              type="message"
+              name="message"
+              placeholder="Write your message here."
+              rows="4"
+            ></textarea>{" "}
+            <div className="col-md-12 text-center">
+              <button className="button">Send Message</button>
+            </div>
+          </div>
+        </div>{" "}
+      </form>
+    </div>
   );
 };
 export default SendEmail;

@@ -1,7 +1,7 @@
 import React from "react";
 const DisplayCompleted = (props) => {
   return (
-    <div>
+    <div className="border-box">
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -19,7 +19,7 @@ const DisplayCompleted = (props) => {
           {props.tickets.map((order) => {
             if (order.status === "C") {
               return (
-                <tr key={order.id}>
+                <tr className="border-box"key={order.id}>
                   <td>{order.date}</td>
                   <td>{order.resident}</td>
                   <td>{order.unit}</td>

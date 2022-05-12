@@ -87,6 +87,7 @@ const ResponseForm = (props) => {
       status: status,
     };
     // Providing the arguments for the Add response function and calling
+    console.log(status);
     addResponse(newResponse);
     // Providing the arguments for the update Status function and calling
     updateStatus(currentStatus, parseInt(ticketId));
@@ -99,15 +100,18 @@ const ResponseForm = (props) => {
 
   return (
     <div>
-      <div className="around-form">
-        <form onSubmit={handleClick}>
-          <div className="form-layout">
+      <div className="layout">
+        <div className="around-form">
+          <form onSubmit={handleClick}>
+            {" "}
+            <h2>Ticket Response Form</h2>
             <div className="input-group input-group-sm mb-3">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="inputGroup-sizing-sm">
                   Worker
                 </span>
                 <input
+                  style={{ width: "17rem" }}
                   value={worker}
                   onChange={(event) => setWorker(event.target.value)}
                 />
@@ -119,6 +123,7 @@ const ResponseForm = (props) => {
                   Date Completed
                 </span>
                 <input
+                  style={{ width: "17rem" }}
                   placeholder="yyyy-mm-dd"
                   value={date}
                   onChange={(event) => setDate(event.target.value)}
@@ -131,6 +136,7 @@ const ResponseForm = (props) => {
                   Comment
                 </span>
                 <input
+                  style={{ width: "17rem" }}
                   value={solution}
                   onChange={(event) => setSolution(event.target.value)}
                 />
@@ -141,27 +147,39 @@ const ResponseForm = (props) => {
                 <span className="input-group-text" id="inputGroup-sizing-sm">
                   Status
                 </span>
-                <input
-                  placeholder="C: Complete, H: Hold"
-                  value={status}
-                  onChange={(event) => setStatus(event.target.value)}
-                />
+                <div className="input-group">
+                  <select
+                    style={{ width: "17rem" }}
+                    className="custom-select"
+                    id="inputGroupSelect04"
+                    onChange={(event) => setStatus(event.target.value)}
+                  >
+                    <option value="C">Completed</option>
+                    <option value="H">On Hold</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <button type="submit">Submit</button>{" "}
-          </div>
-        </form>{" "}
+            <div className="col-md-12 text-center">
+              <button className="button" type="submit">
+                Submit
+              </button>{" "}
+            </div>
+          </form>{" "}
+        </div>
+        <div>
+          <h2>Send Email To Resident</h2>
+          <SendEmail />
+        </div>
       </div>
       <div>
         {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
         <DisplayWorkorders tickets={currentWorkorder} />
       </div>
-      <div>
-        <SendEmail />
-      </div>
+
       <div>
         <Link to="/maintenance">
-          <div class="col-md-12 text-center">
+          <div className="col-md-12 text-center">
             <button>Maintenance Home Page</button>
           </div>
         </Link>
