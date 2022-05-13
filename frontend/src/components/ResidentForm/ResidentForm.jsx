@@ -17,7 +17,7 @@ const ResidentForm = (props) => {
       subject: subject,
       comments: comment,
       entry: entry,
-      priority: priority.toUpperCase(),
+      priority: priority
     };
     console.log(newTicket);
     addTicket(newTicket);
@@ -44,10 +44,6 @@ const ResidentForm = (props) => {
       console.log(error.message);
     }
   }
-
-  //     // axios POST REQUEST to create a workorder
-  //     // use the correct url
-  //     // add the newTicket to the url and also add the token
 
   return (
     <div>

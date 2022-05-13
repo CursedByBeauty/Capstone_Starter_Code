@@ -50,7 +50,7 @@ const ResponseForm = (props) => {
           Authorization: "Bearer " + token,
         },
       });
-      alert("Response has been submitted successfully");
+     
     } catch (error) {
       console.log(workerResponse);
       alert("Invalid entry try again");
@@ -65,7 +65,7 @@ const ResponseForm = (props) => {
         `http://127.0.0.1:8000/api/workorders/${pk}/status/`,
         newStatus
       );
-      alert("Status has been updated");
+      alert("Response has been submitted successfully");
     } catch (error) {
       console.log(newStatus);
       alert("Invalid entry try again");

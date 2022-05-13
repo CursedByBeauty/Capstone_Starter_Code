@@ -1,7 +1,7 @@
 import React from "react";
 import emailjs from "@emailjs/browser";
 import "./SendEmail.css";
-import { KEY, KEY2 } from "./../../localKey";
+import { KEY, KEY2 } from "../../localKey";
 
 const SendEmail = (props) => {
   function sendEmail(e) {
