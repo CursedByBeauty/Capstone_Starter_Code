@@ -154,6 +154,7 @@ const ResponseForm = (props) => {
                     id="inputGroupSelect04"
                     onChange={(event) => setStatus(event.target.value)}
                   >
+                    <option value="default">Choose Here</option>
                     <option value="C">Completed</option>
                     <option value="H">On Hold</option>
                   </select>

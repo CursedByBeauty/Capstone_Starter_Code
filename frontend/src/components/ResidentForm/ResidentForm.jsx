@@ -17,7 +17,7 @@ const ResidentForm = (props) => {
       subject: subject,
       comments: comment,
       entry: entry,
-      priority: priority
+      priority: priority,
     };
     console.log(newTicket);
     addTicket(newTicket);
@@ -91,10 +91,16 @@ const ResidentForm = (props) => {
                 Permission to Enter
               </span>
               <div className="input-group">
-              <select style={{width: "17rem"}}className="custom-select" id="inputGroupSelect04" onChange={(event)=> setEntry(event.target.value)}>
-                <option value="Call">Call</option>
-                <option value="Enter">Enter</option>
-              </select>
+                <select
+                  style={{ width: "17rem" }}
+                  className="custom-select"
+                  id="inputGroupSelect04"
+                  onChange={(event) => setEntry(event.target.value)}
+                >
+                  <option value="default">Choose Here</option>
+                  <option value="Call">Call</option>
+                  <option value="Enter">Enter</option>
+                </select>
               </div>
             </div>
           </div>
@@ -104,13 +110,19 @@ const ResidentForm = (props) => {
                 Priority
               </span>
               <div className="input-group">
-              <select style={{width: "17rem"}}className="custom-select" id="inputGroupSelect04" onChange={(event)=> setPriority(event.target.value)} >
-                <option value="H">High</option>
-                <option value="M">Medium</option>
-                <option value="L">Low</option>
-              </select>
+                <select
+                  style={{ width: "17rem" }}
+                  className="custom-select"
+                  id="inputGroupSelect04"
+                  onChange={(event) => setPriority(event.target.value)}
+                >
+                  <option value="default">Choose Here</option>
+                  <option value="H">High</option>
+                  <option value="M">Medium</option>
+                  <option value="L">Low</option>
+                </select>
+              </div>
             </div>
-          </div>
           </div>
           <button>Submit Ticket</button>
         </form>
