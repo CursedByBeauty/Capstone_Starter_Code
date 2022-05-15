@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  color: black;
 }
 
 html {
@@ -18,20 +19,13 @@ p {
 }
 
 button {
-  background-color: transparent;
-  border: 2px solid #283618;
-  color: #283618;
-  font-size: 1rem;
-  font-family: inherit;
-  max-width: 200px;
-  padding: 0.5rem 0.5rem;
+  border: 2px solid #c5bd27;;
+  background-color: #c5bd27;
+  color: black;
+  border-radius: 15px;
+  box-shadow: 2px 2px 6px;
 }
 
-button:hover {
-  cursor: pointer;
-  color: white;
-  background-color: #283618;
-}
 
 .container {
   margin: 0 auto;
@@ -59,8 +53,8 @@ button:hover {
 
 .border-box {
   background-color: white;
-  box-shadow: 2px 2px 6px;
-  border-radius: 25px;
+  box-shadow: 4px 4px 6px;
+  border-radius: 15px;
 }
 .text {
   display:flex;
