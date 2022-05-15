@@ -25,7 +25,7 @@ class Workorders(models.Model):
     ]
 
     resident = models.CharField(max_length=30)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField(auto_now_add=True)
     unit = models.IntegerField()
     subject = models.CharField(max_length=50)
     comments = models.CharField(max_length=255)
