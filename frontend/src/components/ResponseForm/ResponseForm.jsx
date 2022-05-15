@@ -3,9 +3,11 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import DisplayWorkorders from "../DisplayWorkorders/DisplayWorkorders";
-import SendEmail from "../SendEmail/SendEmail";
 import "./ResponseForm.css";
 import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser";
+import "../SendEmail/SendEmail.css";
+import { KEY, KEY2 } from "../../localKey";
 const ResponseForm = (props) => {
   // Token hook
   const [user, token] = useAuth();
@@ -15,6 +17,7 @@ const ResponseForm = (props) => {
   const [date, setDate] = useState("");
   const [worker, setWorker] = useState("");
   const [solution, setSolution] = useState("");
+  const [email, setEmail] = useState("")
   const [status, setStatus] = useState("");
 
   // VARIABLE WHERE THE CURRENT WORKORDER WILL BE SET
@@ -42,21 +45,6 @@ const ResponseForm = (props) => {
       console.log(error.message);
     }
   }
-  async function addResponse(workerResponse) {
-    //   Calling the url used to create a new response and adding the new response which is workerResponse
-    try {
-      await axios.post("http://127.0.0.1:8000/api/responses/", workerResponse, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-     
-    } catch (error) {
-      console.log(workerResponse);
-      alert("Invalid entry try again");
-      console.log(error.message);
-    }
-  }
 
   // Call the PATCH REQUEST to update the status in the workorder table
   async function updateStatus(newStatus, pk) {
@@ -70,39 +58,38 @@ const ResponseForm = (props) => {
       console.log(newStatus);
       alert("Invalid entry try again");
       console.log(error.message);
+      
     }
   }
 
-  function handleClick(event) {
-    event.preventDefault();
-    // Provided the body for the POST request to create a new Response
-    let newResponse = {
-      worker: worker,
-      date: date,
-      comments: solution,
-      workorder_id: parseInt(ticketId),
-    };
-    // Provided the body for the PATCH request to update status
+  function sendEmail(e) {
+    e.preventDefault();
+    emailjs.sendForm(`${KEY2}`, "template_11qgmnq", e.target, `${KEY}`).then(
+      (result) => {
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
+    alert("Email Sent");
     let currentStatus = {
       status: status,
     };
-    // Providing the arguments for the Add response function and calling
-    console.log(status);
-    addResponse(newResponse);
-    // Providing the arguments for the update Status function and calling
     updateStatus(currentStatus, parseInt(ticketId));
-    // Setting values back to their initial state which is empty
-    setDate("");
-    setWorker("");
-    setSolution("");
-    setStatus("");
+    e.target.reset()
+    setWorker("")
+    setEmail("")
+    setDate("")
+    setSolution("")
+    
   }
 
   return (
     <div>
       <div className="layout">
         <div className="around-form">
-          <form onSubmit={handleClick}>
+          <form onSubmit={sendEmail}>
             {" "}
             <h2>Ticket Response Form</h2>
             <div className="input-group input-group-sm mb-3">
@@ -111,10 +98,19 @@ const ResponseForm = (props) => {
                   Worker
                 </span>
                 <input
+                  name="worker"
                   style={{ width: "17rem" }}
                   value={worker}
                   onChange={(event) => setWorker(event.target.value)}
                 />
+              </div>
+            </div>
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroup-sizing-sm">
+                  Resident Email
+                </span>
+                <input style={{ width: "17rem" }} type="email" name="email" />
               </div>
             </div>
             <div className="input-group input-group-sm mb-3">
@@ -136,6 +132,7 @@ const ResponseForm = (props) => {
                   Comment
                 </span>
                 <input
+                  name="comment"
                   style={{ width: "17rem" }}
                   value={solution}
                   onChange={(event) => setSolution(event.target.value)}
@@ -149,6 +146,7 @@ const ResponseForm = (props) => {
                 </span>
                 <div className="input-group">
                   <select
+                    name="status"
                     style={{ width: "17rem" }}
                     className="custom-select"
                     id="inputGroupSelect04"
@@ -168,20 +166,15 @@ const ResponseForm = (props) => {
             </div>
           </form>{" "}
         </div>
-        <div>
-          <h2>Send Email To Resident</h2>
-          <SendEmail />
-        </div>
       </div>
       <div>
         {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
         <DisplayWorkorders tickets={currentWorkorder} />
       </div>
-
       <div>
         <Link to="/maintenance">
           <div className="col-md-12 text-center">
-            <button>Maintenance Home Page</button>
+            <button onClick={()=> props.getAllTickets()}>Maintenance Home Page</button>
           </div>
         </Link>
       </div>

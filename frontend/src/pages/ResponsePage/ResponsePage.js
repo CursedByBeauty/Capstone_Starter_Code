@@ -6,7 +6,7 @@ const ResponsePage = (props) => {
   return (
     <div>
       <div>
-        <ResponseForm tickets = {props.tickets}/>
+        <ResponseForm getAllTickets={props.getAllTickets} tickets = {props.tickets}/>
       </div>
     </div>
   );
