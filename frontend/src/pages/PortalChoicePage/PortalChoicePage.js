@@ -7,17 +7,17 @@ const PortalChoicePage = (props) => {
       <div className="portal">
       <div className="col-lg-12 text-center">
         <Link to="/resident">
-          <button className="button">Resident Portal</button>
+          <button  style={{backgroundColor: "#edebd7", color: "black"}} className="button">Resident Portal</button>
         </Link>
       </div>
       <div className="col-lg-12 text-center">
         <Link to="/maintenance">
-          <button className="button">Maintenance Portal</button>
+          <button  style={{backgroundColor: "#edebd7", color: "black"}} className="button">Maintenance Portal</button>
         </Link>
       </div>
       <div className="col-lg-12 text-center">
         <Link to="/completed">
-          <button className="button">Property Manager Portal</button>
+          <button style={{backgroundColor: "#edebd7", color: "black"}}className="button">Property Manager Portal</button>
         </Link>
       </div></div>
     </div>

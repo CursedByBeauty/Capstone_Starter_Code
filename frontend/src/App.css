@@ -9,6 +9,7 @@
   color: black;
 }
 
+
 html {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
@@ -19,7 +20,7 @@ p {
 }
 
 .button {
-  background-color: #968e85;
+  background-color: #6e675f;
   color: white;
   border-radius: 20px;
   box-shadow: 2px 2px 6px;
@@ -63,7 +64,11 @@ p {
 .text {
   display:flex;
   justify-content: center;
+  
 }
 .page {
-  background-color: #ffcab1
+  background-color: #423e37
+}
+.welcome {
+  color: white;
 }

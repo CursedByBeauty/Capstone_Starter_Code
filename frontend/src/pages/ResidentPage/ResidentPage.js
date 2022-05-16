@@ -6,7 +6,7 @@ const ResidentPage = (props) => {
   const [user, token] = useAuth();
   return (
     <div>
-      <div className="text"><h1>Welcome {user.username} </h1></div>
+      <div className="text"><h1 className="welcome">Welcome {user.username} </h1></div>
       <div>
           <ResidentForm getAllTickets = {props.getAllTickets} user = {user} token ={token}/>
       </div>
