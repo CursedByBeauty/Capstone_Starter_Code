@@ -17,7 +17,7 @@ const ResponseForm = (props) => {
   const [date, setDate] = useState("");
   const [worker, setWorker] = useState("");
   const [solution, setSolution] = useState("");
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
 
   // VARIABLE WHERE THE CURRENT WORKORDER WILL BE SET
@@ -58,7 +58,6 @@ const ResponseForm = (props) => {
       console.log(newStatus);
       alert("Invalid entry try again");
       console.log(error.message);
-      
     }
   }
 
@@ -77,88 +76,54 @@ const ResponseForm = (props) => {
       status: status,
     };
     updateStatus(currentStatus, parseInt(ticketId));
-    e.target.reset()
-    setWorker("")
-    setEmail("")
-    setDate("")
-    setSolution("")
-    
+    e.target.reset();
+    setWorker("");
+    setEmail("");
+    setDate("");
+    setSolution("");
   }
 
   return (
     <div>
-      <div className="layout">
-        <div className="around-form">
-          <form onSubmit={sendEmail}>
+      <div className="container-display">
+        <div className="resident-box">
+          <form action="/action_page.php" onSubmit={sendEmail}>
             {" "}
             <h2>Ticket Response Form</h2>
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">
-                  Worker
-                </span>
-                <input
-                  name="worker"
-                  style={{ width: "17rem" }}
-                  value={worker}
-                  onChange={(event) => setWorker(event.target.value)}
-                />
-              </div>
-            </div>
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">
-                  Resident Email
-                </span>
-                <input style={{ width: "17rem" }} type="email" name="email" />
-              </div>
-            </div>
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">
-                  Date Completed
-                </span>
-                <input
-                  style={{ width: "17rem" }}
-                  placeholder="yyyy-mm-dd"
-                  value={date}
-                  onChange={(event) => setDate(event.target.value)}
-                />
-              </div>
-            </div>
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">
-                  Comment
-                </span>
-                <input
-                  name="comment"
-                  style={{ width: "17rem" }}
-                  value={solution}
-                  onChange={(event) => setSolution(event.target.value)}
-                />
-              </div>
-            </div>
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">
-                  Status
-                </span>
-                <div className="input-group">
-                  <select
-                    name="status"
-                    style={{ width: "17rem" }}
-                    className="custom-select"
-                    id="inputGroupSelect04"
-                    onChange={(event) => setStatus(event.target.value)}
-                  >
-                    <option value="default">Choose Here</option>
-                    <option value="C">Completed</option>
-                    <option value="H">On Hold</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+            <label> Worker</label>
+            <input
+              className="resident-form"
+              name="worker"
+              value={worker}
+              onChange={(event) => setWorker(event.target.value)}
+            />
+            <label>Resident Email</label>
+            <input className="resident-form" type="email" name="email" />
+            <label>Date Completed</label>
+            <input
+              className="resident-form"
+              placeholder="yyyy-mm-dd"
+              value={date}
+              onChange={(event) => setDate(event.target.value)}
+            />
+            <label>Comment</label>
+            <input
+              name="comment"
+              className="resident-form"
+              value={solution}
+              onChange={(event) => setSolution(event.target.value)}
+            />
+            <label>Status</label>
+            <select
+              name="status"
+              className="resident-form"
+              id="inputGroupSelect04"
+              onChange={(event) => setStatus(event.target.value)}
+            >
+              <option value="default">Choose Here</option>
+              <option value="C">Completed</option>
+              <option value="H">On Hold</option>
+            </select>
             <div className="col-md-12 text-center">
               <button className="button" type="submit">
                 Submit
@@ -166,17 +131,22 @@ const ResponseForm = (props) => {
             </div>
           </form>{" "}
         </div>
-      </div>
-      <div>
-        {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
-        <DisplayWorkorders tickets={currentWorkorder} />
-      </div>
-      <div>
-        <Link to="/maintenance">
-          <div className="col-md-12 text-center">
-            <button onClick={()=> props.getAllTickets()}>Maintenance Home Page</button>
+        <div style={{marginTop: "2rem"}}>
+          {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
+          <DisplayWorkorders tickets={currentWorkorder} />{" "}
+          <div>
+            <Link to="/maintenance">
+              <div style={{marginLeft: "21rem"}}>
+                <button 
+                  className="button"
+                  onClick={() => props.getAllTickets()}
+                >
+                  Maintenance Home Page
+                </button>
+              </div>
+            </Link>
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   );

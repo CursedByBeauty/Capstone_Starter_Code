@@ -18,12 +18,12 @@ p {
   font-size: 20px;
 }
 
-button {
-  border: 2px solid #c5bd27;;
-  background-color: #c5bd27;
-  color: black;
-  border-radius: 15px;
+.button {
+  background-color: #968e85;
+  color: white;
+  border-radius: 20px;
   box-shadow: 2px 2px 6px;
+  padding: 1rem;
 }
 
 
@@ -52,11 +52,18 @@ button {
 }
 
 .border-box {
-  background-color: white;
+  background-color: #ecdcb0;
   box-shadow: 4px 4px 6px;
-  border-radius: 15px;
+  border-radius: 25px;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 .text {
   display:flex;
   justify-content: center;
+}
+.page {
+  background-color: #ffcab1
 }

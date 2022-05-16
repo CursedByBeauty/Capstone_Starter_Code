@@ -1,47 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./DisplayWorkorders.css"
+import "../../App.css"
 const DisplayWorkorders = (props) => {
   return (
-    <div>
-      <table className="table table-bordered">
-        <thead>
-          <tr className="border-box">
-            <th scope="col">Date</th>
-            <th scope="col">Resident</th>
-            <th scope="col">Unit</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Permission to Enter</th>
-            <th scope="col">Comments</th>
-            <th scope="col">Status</th>
-            <th scope="col">Update Ticket</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.tickets.map((order) => {
-            // Gave a condition to only display the incomplete and on hold
-            if (order.status === "I" || order.status === "H") {
-              return (
-                  <tr className="border-box" key={order.id}>
-                    <td>{order.date}</td>
-                    <td>{order.resident}</td>
-                    <td>{order.unit}</td>
-                    <td>{order.subject}</td>
-                    <td>{order.priority}</td>
-                    <td>{order.entry}</td>
-                    <td>{order.comments}</td>
-                    <td>{order.status}</td>
-                    <td>
-                      <Link to={`/response/${order.id}/`}>
-                        <button>Fill Out Ticket</button>
-                      </Link>
-                    </td>
-                  </tr>
-              );
-            }
-          })}
-        </tbody>
-      </table>
+    <div className="container-display">
+      {props.tickets.map((order) => {
+        // Gave a condition to only display the incomplete and on hold
+        if (order.status === "I" || order.status === "H") {
+          return (
+            <div  key={order.id} className="resident-box">
+            <ul className="workorder">
+              <li><h4>Date: <small className="text-muted">{order.date}</small></h4> </li>
+              <li><h4>Resident: <small className="text-muted">{order.resident}</small> </h4> </li>
+              <li><h4>Unit: <small className="text-muted">{order.unit}</small></h4> </li>
+              <li><h4>Subject: <small className="text-muted">{order.subject}</small> </h4> </li>
+              <li><h4>Priority: <small className="text-muted">{order.priority}</small></h4></li>
+              <li><h4>Permission To Enter:<small className="text-muted">{" "}{order.entry}</small></h4></li>
+              <li><h4>Comments: <small className="text-muted">{" "}{order.comments}</small></h4></li>
+              <li><h4>Status: <small className="text-muted">{" "}{order.status}</small></h4></li>
+              <li>
+                {" "}
+                <Link to={`/response/${order.id}/`}>
+                  <button className="button">Fill Out Ticket</button>
+                </Link>
+              </li>
+            </ul>
+            </div>
+          );
+        }
+      })}
     </div>
   );
 };

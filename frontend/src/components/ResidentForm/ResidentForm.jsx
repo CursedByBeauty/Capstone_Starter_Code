@@ -47,84 +47,52 @@ const ResidentForm = (props) => {
 
   return (
     <div>
-      <div className="col-lg-12 text-center">
-        <form onSubmit={handleClick}>
-          <div className="input-group input-group-sm mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroup-sizing-sm">
-                Unit
-              </span>
-              <input
-                style={{ width: "17rem" }}
-                value={unit}
-                onChange={(event) => setUnit(event.target.value)}
-              />
-            </div>
+      <div className="resident-box">
+        <form action="/action_page.php" onSubmit={handleClick}>
+          <label>Unit</label>
+          <input
+            className="resident-form"
+            value={unit}
+            onChange={(event) => setUnit(event.target.value)}
+          />
+
+          <label>Subject</label>
+          <input
+            className="resident-form"
+            value={subject}
+            onChange={(event) => setSubject(event.target.value)}
+          />
+
+          <label>Comment</label>
+          <input
+            className="resident-form"
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
+          />
+
+          <label>Permission to Enter</label>
+          <select
+            className="resident-form"
+            onChange={(event) => setEntry(event.target.value)}
+          >
+            <option value="default">Choose Here</option>
+            <option value="Call">Call</option>
+            <option value="Enter">Enter</option>
+          </select>
+
+          <label>Priority</label>
+          <select
+            className="resident-form"
+            onChange={(event) => setPriority(event.target.value)}
+          >
+            <option value="default">Choose Here</option>
+            <option value="H">High</option>
+            <option value="M">Medium</option>
+            <option value="L">Low</option>
+          </select>
+          <div>
+            <button className="button">Submit Ticket</button>
           </div>
-          <div className="input-group input-group-sm mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroup-sizing-sm">
-                Subject
-              </span>
-              <input
-                style={{ width: "17rem" }}
-                value={subject}
-                onChange={(event) => setSubject(event.target.value)}
-              />
-            </div>
-          </div>
-          <div className="input-group input-group-sm mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroup-sizing-sm">
-                Comment
-              </span>
-              <input
-                style={{ width: "17rem" }}
-                value={comment}
-                onChange={(event) => setComment(event.target.value)}
-              />
-            </div>
-          </div>
-          <div className="input-group input-group-sm mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroup-sizing-sm">
-                Permission to Enter
-              </span>
-              <div className="input-group">
-                <select
-                  style={{ width: "17rem" }}
-                  className="custom-select"
-                  id="inputGroupSelect04"
-                  onChange={(event) => setEntry(event.target.value)}
-                >
-                  <option value="default">Choose Here</option>
-                  <option value="Call">Call</option>
-                  <option value="Enter">Enter</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className="input-group input-group-sm mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroup-sizing-sm">
-                Priority
-              </span>
-              <div className="input-group">
-                <select
-                  style={{ width: "17rem" }}
-                  className="custom-select"
-                  id="inputGroupSelect04"
-                  onChange={(event) => setPriority(event.target.value)}
-                >
-                  <option value="default">Choose Here</option>
-                  <option value="H">High</option>
-                  <option value="M">Medium</option>
-                  <option value="L">Low</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <button>Submit Ticket</button>
         </form>
       </div>
     </div>

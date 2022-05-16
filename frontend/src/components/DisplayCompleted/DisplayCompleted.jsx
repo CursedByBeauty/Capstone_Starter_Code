@@ -1,40 +1,27 @@
 import React from "react";
 const DisplayCompleted = (props) => {
   return (
-    <div className="border-box">
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Resident</th>
-            <th scope="col">Unit</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Permission to Enter</th>
-            <th scope="col">Comments</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.tickets.map((order) => {
-            if (order.status === "C") {
-              return (
-                <tr className="border-box"key={order.id}>
-                  <td>{order.date}</td>
-                  <td>{order.resident}</td>
-                  <td>{order.unit}</td>
-                  <td>{order.subject}</td>
-                  <td>{order.priority}</td>
-                  <td>{order.entry}</td>
-                  <td>{order.comments}</td>
-                  <td>{order.status}</td>
-                </tr>
-              );
-            }
-          })}
-        </tbody>
-      </table>
-    </div>
+    <div className="container-display">
+    {props.tickets.map((order) => {
+      // Gave a condition to only display the incomplete and on hold
+      if (order.status === "C") {
+        return (
+          <div key={order.id} className="border-box">
+          <ul className="workorder" >
+            <li><h4>Date: <small className="text-muted">{order.date}</small></h4> </li>
+            <li><h4>Resident: <small className="text-muted">{order.resident}</small> </h4> </li>
+            <li><h4>Unit: <small className="text-muted">{order.unit}</small></h4> </li>
+            <li><h4>Subject: <small className="text-muted">{order.subject}</small> </h4> </li>
+            <li><h4>Priority: <small className="text-muted">{order.priority}</small></h4></li>
+            <li><h4>Permission To Enter:<small className="text-muted">{" "}{order.entry}</small></h4></li>
+            <li><h4>Comments: <small className="text-muted">{" "}{order.comments}</small></h4></li>
+            <li><h4>Status: <small className="text-muted">{" "}{order.status}</small></h4></li>
+          </ul>
+          </div>
+        );
+      }
+    })}
+  </div>
   );
 };
 

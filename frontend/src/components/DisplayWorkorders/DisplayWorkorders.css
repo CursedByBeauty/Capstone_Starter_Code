@@ -1,0 +1,16 @@
+.workorder {
+    list-style-type: none; 
+}
+li {
+    display:flex;
+}
+.container-display {
+    display:grid;
+    grid-template-areas:
+    "tl tr"
+    "ml mr"
+    "bl br";
+    padding: 1rem;
+    margin-right: auto;
+    margin-left: auto
+}
