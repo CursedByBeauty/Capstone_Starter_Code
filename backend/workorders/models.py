@@ -1,4 +1,4 @@
-from random import choices
+from authentication.models import User
 from django.db import models
 
 # Create your models here.
@@ -24,7 +24,7 @@ class Workorders(models.Model):
             ('C', 'Complete'),
     ]
 
-    resident = models.CharField(max_length=30)
+    resident = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     unit = models.IntegerField()
     subject = models.CharField(max_length=50)
