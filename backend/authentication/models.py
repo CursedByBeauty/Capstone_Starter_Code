@@ -3,8 +3,11 @@ from django.contrib.auth.models import AbstractUser
 
 
 
+
 class User(AbstractUser):
-    is_staff = models.BooleanField('staff status', default=False)
+    #Making a roles column for the resident, maintenance worker, and the property manager. 
+    role = models.CharField(max_length=50)
+
     '''
     This is a custom version of the built in User class
     It contains all of the built in fields and functionality of the standard User
