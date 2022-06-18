@@ -12,11 +12,13 @@ from django.shortcuts import get_object_or_404
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def get_all_responses(request):
+
     if request.method == 'GET':
         # GETS ALL THE RESPONSES IN THE TABLE
         response = WorkerResponse.objects.all()
         serializer = WorkerResponseSerializer(response, many = True)
         return Response(serializer.data, status.HTTP_200_OK)
+
     elif request.method == 'POST':
         # MAINTENANCE FEATURE TO ADD A NEW RESPONSE
         serializer = WorkerResponseSerializer(data=request.data)
