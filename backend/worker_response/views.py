@@ -15,7 +15,7 @@ def get_all_responses(request):
 
     if request.method == 'GET':
         # GETS ALL THE RESPONSES IN THE TABLE
-        response = WorkerResponse.objects.all()
+        response = WorkerResponse.objects.filter(worker__id = request.user.id)
         serializer = WorkerResponseSerializer(response, many = True)
         return Response(serializer.data, status.HTTP_200_OK)
 
