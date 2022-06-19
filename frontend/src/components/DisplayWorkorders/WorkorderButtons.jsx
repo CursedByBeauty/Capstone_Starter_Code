@@ -47,6 +47,7 @@ const WorkorderButtons = (props) => {
       props.getAllTickets();
     } catch (error) {
       console.log(error.message);
+      alert("Invalid Entry")
     }
   }
   if (user.role === "Maintenance" || user.role === "Management") {
