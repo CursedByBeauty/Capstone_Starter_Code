@@ -12,7 +12,7 @@ const ResidentForm = (props) => {
   function handleClick(event) {
     event.preventDefault();
     let newTicket = {
-      resident: props.user.username,
+      resident_id: props.user.id,
       unit: parseInt(unit),
       subject: subject,
       comments: comment,
