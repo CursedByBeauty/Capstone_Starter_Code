@@ -11,14 +11,16 @@ import { KEY, KEY2 } from "../../localKey";
 const ResponseForm = (props) => {
   // Token hook
   const [user, token] = useAuth();
+  const [usersFound, setUsersFound] = useState([]);
   //   :ticketId param from the route
   const { ticketId } = useParams();
   //   the 4 fields needed to create a new response. Look at the postman create a response body
   const [date, setDate] = useState("");
-  const [worker, setWorker] = useState("");
+  const [workerId, setWorkerId] = useState();
   const [solution, setSolution] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
+  const [managerId, setManagerId] = useState()
 
   // VARIABLE WHERE THE CURRENT WORKORDER WILL BE SET
   const [currentWorkorder, setCurrentWorkorder] = useState([]);
@@ -27,6 +29,7 @@ const ResponseForm = (props) => {
     // ON MOUNTING CALLING THE FUNCTION TO GET THE CURRENT WORKORDER SO IT CAN DISPLAY THE MINUTE I OPEN THE RESPONSE PAGE
     // Passing in the Parameters ticketId which is the current ticket pk
     getWorkorderById(ticketId);
+    getAllUsers();
   }, []);
   // getting the CURRENT WORKORDER BY THE ID WHICH IS THE TICKETID
   async function getWorkorderById(pk) {
@@ -41,6 +44,22 @@ const ResponseForm = (props) => {
       );
       // Setting the current workorder to equal the current ticket we clicked
       setCurrentWorkorder([response.data]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  // GETS ALL THE USERS FROM THE DATABASE
+  async function getAllUsers() {
+    try {
+      let response = await axios.get(
+        "http://127.0.0.1:8000/api/responses/users/",
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      setUsersFound(response.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -77,7 +96,7 @@ const ResponseForm = (props) => {
     };
     updateStatus(currentStatus, parseInt(ticketId));
     e.target.reset();
-    setWorker("");
+    setWorkerId();
     setEmail("");
     setDate("");
     setSolution("");
@@ -91,12 +110,39 @@ const ResponseForm = (props) => {
             {" "}
             <h2>Ticket Response Form</h2>
             <label> Worker</label>
-            <input
+            <select
               className="resident-form"
-              name="worker"
-              value={worker}
-              onChange={(event) => setWorker(event.target.value)}
-            />
+              id="inputGroupSelect04"
+              onChange={(event) => setWorkerId(event.target.value)}
+            >
+              <option value="default">Choose Here</option>
+              {usersFound
+                .filter((element) => element.role === "Maintenance")
+                .map((element) => {
+                  return (
+                    <option value={element.id}>
+                      {element.first_name} {element.last_name}
+                    </option>
+                  );
+                })}
+            </select>
+            <label>Manager</label>
+              <select
+              className="resident-form"
+              id="inputGroupSelect04"
+              onChange={(event) => setManagerId(event.target.value)}
+            >
+              <option value="default">Choose Here</option>
+              {usersFound
+                .filter((element) => element.role === "Management")
+                .map((element) => {
+                  return (
+                    <option value={element.id}>
+                      {element.first_name} {element.last_name}
+                    </option>
+                  );
+                })}
+            </select>
             <label>Resident Email</label>
             <input className="resident-form" type="email" name="email" />
             <label>Date Completed</label>
@@ -131,13 +177,13 @@ const ResponseForm = (props) => {
             </div>
           </form>{" "}
         </div>
-        <div style={{marginTop: "2rem"}}>
+        <div style={{ marginTop: "2rem" }}>
           {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
           <DisplayWorkorders tickets={currentWorkorder} />{" "}
           <div>
             <Link to="/maintenance">
-              <div style={{marginLeft: "21rem"}}>
-                <button 
+              <div style={{ marginLeft: "21rem" }}>
+                <button
                   className="button"
                   onClick={() => props.getAllTickets()}
                 >
