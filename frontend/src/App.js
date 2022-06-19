@@ -49,7 +49,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <WorkordersPage user={user} setTickets={setTickets} tickets={tickets} />
+              <WorkordersPage user={user} setTickets={setTickets} tickets={tickets} getAllTickets = {getAllTickets}/>
             </PrivateRoute>
           }
         />

@@ -60,7 +60,7 @@ const DisplayWorkorders = (props) => {
                   </h4>
                 </li>
                 <li>
-               <WorkorderButtons orderId = {order.id}/>
+               <WorkorderButtons getAllTickets = {props.getAllTickets} ticket = {order} orderId = {order.id}/>
                 </li>
               </ul>
             </div>
