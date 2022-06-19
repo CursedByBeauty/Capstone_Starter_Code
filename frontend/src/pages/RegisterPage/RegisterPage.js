@@ -10,6 +10,7 @@ const RegisterPage = () => {
     password: "",
     firstName: "",
     lastName: "",
+    role: ""
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
@@ -63,6 +64,16 @@ const RegisterPage = () => {
             value={formData.password}
             onChange={handleInputChange}
           />
+        </label>
+        <label>Role: 
+          <select
+          name="role"
+          onChange={handleInputChange}>
+            <option>Choose Here</option>
+            <option value="Management">Management</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Resident">Resident</option>
+          </select>
         </label>
         <p style={{ fontSize: "12px" }}>
           NOTE: Make this an uncommon password with characters, numbers, and
