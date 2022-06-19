@@ -12,7 +12,7 @@ const DisplayWorkorders = (props) => {
             <div  key={order.id} className="resident-box">
             <ul className="workorder">
               <li><h4>Date: <small className="text-muted">{order.date}</small></h4> </li>
-              <li><h4>Resident: <small className="text-muted">{order.resident}</small> </h4> </li>
+              <li><h4>Resident: <small className="text-muted">{order.resident.first_name} {order.resident.last_name}</small> </h4> </li>
               <li><h4>Unit: <small className="text-muted">{order.unit}</small></h4> </li>
               <li><h4>Subject: <small className="text-muted">{order.subject}</small> </h4> </li>
               <li><h4>Priority: <small className="text-muted">{order.priority}</small></h4></li>
