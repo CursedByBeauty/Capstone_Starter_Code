@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./DisplayWorkorders.css"
-import "../../App.css"
+import "./DisplayWorkorders.css";
+import "../../App.css";
+import TicketButtons from "../TicketButtons/TicketButtons";
 const DisplayWorkorders = (props) => {
   return (
     <div className="container-display">
@@ -9,23 +9,60 @@ const DisplayWorkorders = (props) => {
         // Gave a condition to only display the incomplete and on hold
         if (order.status === "I" || order.status === "H") {
           return (
-            <div  key={order.id} className="resident-box">
-            <ul className="workorder">
-              <li><h4>Date: <small className="text-muted">{order.date}</small></h4> </li>
-              <li><h4>Resident: <small className="text-muted">{order.resident.first_name} {order.resident.last_name}</small> </h4> </li>
-              <li><h4>Unit: <small className="text-muted">{order.unit}</small></h4> </li>
-              <li><h4>Subject: <small className="text-muted">{order.subject}</small> </h4> </li>
-              <li><h4>Priority: <small className="text-muted">{order.priority}</small></h4></li>
-              <li><h4>Permission To Enter:<small className="text-muted">{" "}{order.entry}</small></h4></li>
-              <li><h4>Comments: <small className="text-muted">{" "}{order.comments}</small></h4></li>
-              <li><h4>Status: <small className="text-muted">{" "}{order.status}</small></h4></li>
-              <li>
-                {" "}
-                <Link to={`/response/${order.id}/`}>
-                  <button className="button">Fill Out Ticket</button>
-                </Link>
-              </li>
-            </ul>
+            <div key={order.id} className="resident-box">
+              <ul className="workorder">
+                <li>
+                  <h4>
+                    Date: <small className="text-muted">{order.date}</small>
+                  </h4>{" "}
+                </li>
+                <li>
+                  <h4>
+                    Resident:{" "}
+                    <small className="text-muted">
+                      {order.resident.first_name} {order.resident.last_name}
+                    </small>{" "}
+                  </h4>{" "}
+                </li>
+                <li>
+                  <h4>
+                    Unit: <small className="text-muted">{order.unit}</small>
+                  </h4>{" "}
+                </li>
+                <li>
+                  <h4>
+                    Subject:{" "}
+                    <small className="text-muted">{order.subject}</small>{" "}
+                  </h4>{" "}
+                </li>
+                <li>
+                  <h4>
+                    Priority:{" "}
+                    <small className="text-muted">{order.priority}</small>
+                  </h4>
+                </li>
+                <li>
+                  <h4>
+                    Permission To Enter:
+                    <small className="text-muted"> {order.entry}</small>
+                  </h4>
+                </li>
+                <li>
+                  <h4>
+                    Comments:{" "}
+                    <small className="text-muted"> {order.comments}</small>
+                  </h4>
+                </li>
+                <li>
+                  <h4>
+                    Status:{" "}
+                    <small className="text-muted"> {order.status}</small>
+                  </h4>
+                </li>
+                <li>
+                 <TicketButtons user ={props.user} orderId={order.id}/>
+                </li>
+              </ul>
             </div>
           );
         }
