@@ -80,6 +80,17 @@ const ResponseForm = (props) => {
     }
   }
 
+  async function createResponse(newResponse) {
+    try {
+      await axios.post('http://127.0.0.1:8000/api/responses/', newResponse, {
+        headers: {
+          Authorization: "Bearer " + token}
+      })
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   function sendEmail(e) {
     e.preventDefault();
     emailjs.sendForm(`${KEY2}`, "template_11qgmnq", e.target, `${KEY}`).then(
@@ -91,12 +102,20 @@ const ResponseForm = (props) => {
       }
     );
     alert("Email Sent");
+    createResponse({
+      worker_id: workerId,
+      management_id: managerId,
+      date: date,
+      comments: solution,
+      workorder_id: ticketId
+    })
     let currentStatus = {
       status: status,
     };
     updateStatus(currentStatus, parseInt(ticketId));
     e.target.reset();
     setWorkerId();
+    setManagerId();
     setEmail("");
     setDate("");
     setSolution("");
