@@ -17,12 +17,15 @@ def get_all_responses(request):
         # GETS ALL THE RESPONSES IN THE TABLE FOR THE CURRENT MAINTENANCE WORKER LOGGED IN
         maintenance = WorkerResponse.objects.filter(worker__role = request.user.role)
         resident = WorkerResponse.objects.filter(workorder__resident_id = request.user.id)
-        
+        management = WorkerResponse.objects.filter(management__id = request.user.id)
         if maintenance: 
             serializer = WorkerResponseSerializer(maintenance, many = True)
             return Response(serializer.data, status.HTTP_200_OK)
         elif resident:
             serializer = WorkerResponseSerializer(resident, many=True)
+            return Response(serializer.data, status.HTTP_200_OK)
+        elif management:
+            serializer = WorkerResponseSerializer(management, many=True)
             return Response(serializer.data, status.HTTP_200_OK)
         else:
             return Response(status = status.HTTP_204_NO_CONTENT)
