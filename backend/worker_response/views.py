@@ -28,7 +28,7 @@ def get_all_responses(request):
             serializer = WorkerResponseSerializer(management, many=True)
             return Response(serializer.data, status.HTTP_200_OK)
         else:
-            return Response(status = status.HTTP_204_NO_CONTENT)
+            return Response([],status = status.HTTP_200_OK)
         
 
     elif request.method == 'POST':
