@@ -121,7 +121,6 @@ const ResponseForm = (props) => {
     setDate("");
     setSolution("");
   }
-  if (user.role === "Maintenance" || user.role === "Management") {
     return (
       <div>
         <div className="container-display">
@@ -202,7 +201,7 @@ const ResponseForm = (props) => {
             {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
             <DisplayWorkorders tickets={currentWorkorder} />{" "}
             <div>
-              <Link to="/maintenance">
+              <Link to="/">
                 <div style={{ marginLeft: "21rem" }}>
                   <button
                     className="button"
@@ -217,13 +216,6 @@ const ResponseForm = (props) => {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div>
-        <DisplayWorkorders tickets={currentWorkorder}/>
-      </div>
-    )
-  }
 };
 
 export default ResponseForm;
