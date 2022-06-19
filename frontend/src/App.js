@@ -54,7 +54,7 @@ function App() {
           path="/maintenance"
           element={
             <PrivateRoute>
-              <WorkordersPage setTickets={setTickets} tickets={tickets} />
+              <WorkordersPage user={user} setTickets={setTickets} tickets={tickets} />
             </PrivateRoute>
           }
         />

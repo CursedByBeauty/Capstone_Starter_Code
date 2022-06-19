@@ -6,7 +6,7 @@ import DisplayWorkorders from '../../components/DisplayWorkorders/DisplayWorkord
 const WorkordersPage = (props) => {
     return ( 
         <div>
-            <DisplayWorkorders tickets={props.tickets}/>
+            <DisplayWorkorders user={props.user} tickets={props.tickets}/>
         </div>
      );
 }
