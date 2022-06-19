@@ -14,9 +14,9 @@ from django.shortcuts import get_object_or_404
 def get_all_responses(request):
 
     if request.method == 'GET':
-        # GETS ALL THE RESPONSES IN THE TABLE
-        response = WorkerResponse.objects.filter(worker__id = request.user.id)
-        serializer = WorkerResponseSerializer(response, many = True)
+        # GETS ALL THE RESPONSES IN THE TABLE FOR THE CURRENT MAINTENANCE WORKER LOGGED IN
+        maintenance = WorkerResponse.objects.filter(worker__id = request.user.id)
+        serializer = WorkerResponseSerializer(maintenance, many = True)
         return Response(serializer.data, status.HTTP_200_OK)
 
     elif request.method == 'POST':
