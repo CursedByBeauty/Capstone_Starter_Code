@@ -1,4 +1,5 @@
-
+from authentication.models import User
+from authentication.serializers import UserSerializer
 from .models import WorkerResponse
 from .serializers import WorkerResponseSerializer
 from modulefinder import IMPORT_NAME
@@ -52,3 +53,10 @@ def response_details(request, pk):
         if serializer.is_valid(raise_exception=True): 
             serializer.save()
             return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_all_users(request): 
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
