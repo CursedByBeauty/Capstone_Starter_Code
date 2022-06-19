@@ -15,9 +15,18 @@ def get_all_responses(request):
 
     if request.method == 'GET':
         # GETS ALL THE RESPONSES IN THE TABLE FOR THE CURRENT MAINTENANCE WORKER LOGGED IN
-        maintenance = WorkerResponse.objects.filter(worker__id = request.user.id)
-        serializer = WorkerResponseSerializer(maintenance, many = True)
-        return Response(serializer.data, status.HTTP_200_OK)
+        maintenance = WorkerResponse.objects.filter(worker__role = request.user.role)
+        resident = WorkerResponse.objects.filter(workorder__resident_id = request.user.id)
+        
+        if maintenance: 
+            serializer = WorkerResponseSerializer(maintenance, many = True)
+            return Response(serializer.data, status.HTTP_200_OK)
+        elif resident:
+            serializer = WorkerResponseSerializer(resident, many=True)
+            return Response(serializer.data, status.HTTP_200_OK)
+        else:
+            return Response(status = status.HTTP_204_NO_CONTENT)
+        
 
     elif request.method == 'POST':
         # MAINTENANCE FEATURE TO ADD A NEW RESPONSE
