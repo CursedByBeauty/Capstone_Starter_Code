@@ -14,16 +14,10 @@ def get_all_workorders(request):
     # GETS ALL WORKORDERS 
 
     if request.method == 'GET':
-        resident = Workorders.objects.filter(resident__id = request.user.id)
-        if resident:
-            serializer = WorkorderSerializers(resident, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        elif request.user.role == "Maintenance" or request.user.role == "Management":
-            workorders = Workorders.objects.all()
-            serializer = WorkorderSerializers(workorders, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response([],status = status.HTTP_200_OK)
+        workorders  = Workorders.objects.all()
+        serializer = WorkorderSerializers(workorders, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
     # TENTANT FEATURE TO CREATE A WORKORDER
     elif request.method == 'POST':
         serializer = WorkorderSerializers(data=request.data)
