@@ -9,7 +9,6 @@ import useAuth from "./hooks/useAuth";
 import WorkordersPage from "./pages/WorkordersPage/WorkordersPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import PortalChoicePage from "./pages/PortalChoicePage/PortalChoicePage";
 import ResidentPage from "./pages/ResidentPage/ResidentPage";
 
 // Component Imports
@@ -48,10 +47,6 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<PortalChoicePage  />}
-        />
-        <Route
-          path="/maintenance"
           element={
             <PrivateRoute>
               <WorkordersPage user={user} setTickets={setTickets} tickets={tickets} />

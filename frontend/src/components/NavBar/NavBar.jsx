@@ -26,6 +26,22 @@ const Navbar = () => {
             </button>
           )}{" "}
         </li>
+        <li>
+          <button className="button" onClick={() => navigate("/resident")}>
+            Create Ticket
+          </button>
+        </li>
+        <li>
+          <button className="button" onClick={() => navigate("/")}>
+            Incomplete Tickets
+          </button>
+        </li>
+        <li>
+          <button className="button" onClick={() => navigate("/completed")}>
+            Completed Tickets
+          </button>
+        </li>
+        <li></li>
       </ul>
     </div>
   );
