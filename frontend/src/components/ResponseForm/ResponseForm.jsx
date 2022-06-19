@@ -139,7 +139,7 @@ const ResponseForm = (props) => {
                 .filter((element) => element.role === "Maintenance")
                 .map((element) => {
                   return (
-                    <option value={element.id}>
+                    <option key = {element.id *3} value={element.id}>
                       {element.first_name} {element.last_name}
                     </option>
                   );
@@ -156,7 +156,7 @@ const ResponseForm = (props) => {
                 .filter((element) => element.role === "Management")
                 .map((element) => {
                   return (
-                    <option value={element.id}>
+                    <option key = {element.id *4} value={element.id}>
                       {element.first_name} {element.last_name}
                     </option>
                   );
@@ -166,6 +166,7 @@ const ResponseForm = (props) => {
             <input className="resident-form" type="email" name="email" />
             <label>Date Completed</label>
             <input
+            type='date'
               className="resident-form"
               placeholder="yyyy-mm-dd"
               value={date}
