@@ -20,7 +20,7 @@ const ResponseForm = (props) => {
   const [solution, setSolution] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
-  const [managerId, setManagerId] = useState()
+  const [managerId, setManagerId] = useState();
 
   // VARIABLE WHERE THE CURRENT WORKORDER WILL BE SET
   const [currentWorkorder, setCurrentWorkorder] = useState([]);
@@ -82,12 +82,13 @@ const ResponseForm = (props) => {
 
   async function createResponse(newResponse) {
     try {
-      await axios.post('http://127.0.0.1:8000/api/responses/', newResponse, {
+      await axios.post("http://127.0.0.1:8000/api/responses/", newResponse, {
         headers: {
-          Authorization: "Bearer " + token}
-      })
+          Authorization: "Bearer " + token,
+        },
+      });
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   }
 
@@ -107,8 +108,8 @@ const ResponseForm = (props) => {
       management_id: managerId,
       date: date,
       comments: solution,
-      workorder_id: ticketId
-    })
+      workorder_id: ticketId,
+    });
     let currentStatus = {
       status: status,
     };
@@ -120,102 +121,109 @@ const ResponseForm = (props) => {
     setDate("");
     setSolution("");
   }
-
-  return (
-    <div>
-      <div className="container-display">
-        <div className="resident-box">
-          <form action="/action_page.php" onSubmit={sendEmail}>
-            {" "}
-            <h2>Ticket Response Form</h2>
-            <label> Worker</label>
-            <select
-              className="resident-form"
-              id="inputGroupSelect04"
-              onChange={(event) => setWorkerId(event.target.value)}
-            >
-              <option value="default">Choose Here</option>
-              {usersFound
-                .filter((element) => element.role === "Maintenance")
-                .map((element) => {
-                  return (
-                    <option key = {element.id *3} value={element.id}>
-                      {element.first_name} {element.last_name}
-                    </option>
-                  );
-                })}
-            </select>
-            <label>Manager</label>
+  if (user.role === "Maintenance" || user.role === "Management") {
+    return (
+      <div>
+        <div className="container-display">
+          <div className="resident-box">
+            <form action="/action_page.php" onSubmit={sendEmail}>
+              {" "}
+              <h2>Ticket Response Form</h2>
+              <label> Worker</label>
               <select
-              className="resident-form"
-              id="inputGroupSelect04"
-              onChange={(event) => setManagerId(event.target.value)}
-            >
-              <option value="default">Choose Here</option>
-              {usersFound
-                .filter((element) => element.role === "Management")
-                .map((element) => {
-                  return (
-                    <option key = {element.id *4} value={element.id}>
-                      {element.first_name} {element.last_name}
-                    </option>
-                  );
-                })}
-            </select>
-            <label>Resident Email</label>
-            <input className="resident-form" type="email" name="email" />
-            <label>Date Completed</label>
-            <input
-            type='date'
-              className="resident-form"
-              placeholder="yyyy-mm-dd"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
-            />
-            <label>Comment</label>
-            <input
-              name="comment"
-              className="resident-form"
-              value={solution}
-              onChange={(event) => setSolution(event.target.value)}
-            />
-            <label>Status</label>
-            <select
-              name="status"
-              className="resident-form"
-              id="inputGroupSelect04"
-              onChange={(event) => setStatus(event.target.value)}
-            >
-              <option value="default">Choose Here</option>
-              <option value="C">Completed</option>
-              <option value="H">On Hold</option>
-            </select>
-            <div className="col-md-12 text-center">
-              <button className="button" type="submit">
-                Submit
-              </button>{" "}
-            </div>
-          </form>{" "}
-        </div>
-        <div style={{ marginTop: "2rem" }}>
-          {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
-          <DisplayWorkorders tickets={currentWorkorder} />{" "}
-          <div>
-            <Link to="/maintenance">
-              <div style={{ marginLeft: "21rem" }}>
-                <button
-                  className="button"
-                  onClick={() => props.getAllTickets()}
-                >
-                  Maintenance Home Page
-                </button>
+                className="resident-form"
+                id="inputGroupSelect04"
+                onChange={(event) => setWorkerId(event.target.value)}
+              >
+                <option value="default">Choose Here</option>
+                {usersFound
+                  .filter((element) => element.role === "Maintenance")
+                  .map((element) => {
+                    return (
+                      <option key={element.id * 3} value={element.id}>
+                        {element.first_name} {element.last_name}
+                      </option>
+                    );
+                  })}
+              </select>
+              <label>Manager</label>
+              <select
+                className="resident-form"
+                id="inputGroupSelect04"
+                onChange={(event) => setManagerId(event.target.value)}
+              >
+                <option value="default">Choose Here</option>
+                {usersFound
+                  .filter((element) => element.role === "Management")
+                  .map((element) => {
+                    return (
+                      <option key={element.id * 4} value={element.id}>
+                        {element.first_name} {element.last_name}
+                      </option>
+                    );
+                  })}
+              </select>
+              <label>Resident Email</label>
+              <input className="resident-form" type="email" name="email" />
+              <label>Date Completed</label>
+              <input
+                type="date"
+                className="resident-form"
+                placeholder="yyyy-mm-dd"
+                value={date}
+                onChange={(event) => setDate(event.target.value)}
+              />
+              <label>Comment</label>
+              <input
+                name="comment"
+                className="resident-form"
+                value={solution}
+                onChange={(event) => setSolution(event.target.value)}
+              />
+              <label>Status</label>
+              <select
+                name="status"
+                className="resident-form"
+                id="inputGroupSelect04"
+                onChange={(event) => setStatus(event.target.value)}
+              >
+                <option value="default">Choose Here</option>
+                <option value="C">Completed</option>
+                <option value="H">On Hold</option>
+              </select>
+              <div className="col-md-12 text-center">
+                <button className="button" type="submit">
+                  Submit
+                </button>{" "}
               </div>
-            </Link>
+            </form>{" "}
+          </div>
+          <div style={{ marginTop: "2rem" }}>
+            {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
+            <DisplayWorkorders tickets={currentWorkorder} />{" "}
+            <div>
+              <Link to="/maintenance">
+                <div style={{ marginLeft: "21rem" }}>
+                  <button
+                    className="button"
+                    onClick={() => props.getAllTickets()}
+                  >
+                    Maintenance Home Page
+                  </button>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        <DisplayWorkorders tickets={currentWorkorder}/>
+      </div>
+    )
+  }
 };
 
 export default ResponseForm;

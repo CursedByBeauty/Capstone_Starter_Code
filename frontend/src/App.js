@@ -63,7 +63,7 @@ function App() {
         />
         <Route
           path="/response/:ticketId/"
-          element={<ResponsePage getAllTickets={getAllTickets}setTickets={setTickets} tickets={tickets} />}
+          element={<ResponsePage getAllTickets={getAllTickets} setTickets={setTickets} tickets={tickets} />}
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />

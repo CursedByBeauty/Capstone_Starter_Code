@@ -1,7 +1,7 @@
 import React from "react";
 import "./DisplayWorkorders.css";
 import "../../App.css";
-import TicketButtons from "../TicketButtons/TicketButtons";
+import { Link } from "react-router-dom";
 const DisplayWorkorders = (props) => {
   return (
     <div className="container-display">
@@ -60,7 +60,9 @@ const DisplayWorkorders = (props) => {
                   </h4>
                 </li>
                 <li>
-                 <TicketButtons user ={props.user} orderId={order.id}/>
+                  <Link to={`/response/${order.id}/`}>
+                    <button className="button">Update Ticket</button>
+                  </Link>
                 </li>
               </ul>
             </div>
