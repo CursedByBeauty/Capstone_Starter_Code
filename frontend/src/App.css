@@ -15,16 +15,13 @@ html {
   font-family: "Poppins", sans-serif;
 }
 
-p {
-  font-size: 20px;
-}
-
 .button {
   background-color: #6e675f;
   color: white;
-  border-radius: 20px;
-  box-shadow: 2px 2px 6px;
+  border-radius:5px;
+  box-shadow: 6px 6px 6px;
   padding: 1rem;
+  width: 20rem;
 }
 
 
@@ -54,8 +51,8 @@ p {
 
 .border-box {
   background-color: #edebd7;
-  box-shadow: 4px 4px 6px;
-  border-radius: 25px;
+  box-shadow: 6px 6px 6px;
+  border-radius: 10px;
   margin-bottom: 2rem;
   padding: 1rem;
   margin-right: 1rem;
@@ -67,7 +64,7 @@ p {
   
 }
 .page {
-  background-color: #423e37
+  background-color: #6e675f
 }
 .welcome {
   color: white;

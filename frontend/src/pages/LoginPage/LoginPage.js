@@ -19,32 +19,38 @@ const LoginPage = () => {
   }, [isServerError]);
 
   return (
-    <div className="container">
-      <form className="form" onSubmit={handleSubmit}>
-        <label>
-          Username:{" "}
+    <div className="login-page">
+      <div className="resident-box">
+        <form
+          action="/action_page.php"
+          className="form"
+          onSubmit={handleSubmit}
+        >
+          <label>Username:</label>
           <input
             type="text"
+            className="resident-form"
             name="username"
             value={formData.username}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
-          Password:{" "}
+
+          <label>Password:</label>
           <input
             type="text"
             name="password"
+            className="resident-form"
             value={formData.password}
             onChange={handleInputChange}
           />
-        </label>
-        {isServerError ? (
-          <p className="error">Login failed, incorrect credentials!</p>
-        ) : null}
-        <Link to="/register">Click to register!</Link>
-        <button>Login!</button>
-      </form>
+
+          {isServerError ? (
+            <p className="error">Login failed, incorrect credentials!</p>
+          ) : null}
+          <Link to="/register">Click to register!</Link>
+          <button className="button">Login!</button>
+        </form>
+      </div>
     </div>
   );
 };

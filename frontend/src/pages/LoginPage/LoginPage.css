@@ -1,3 +1,17 @@
 .error {
   color: red;
 }
+
+.login-page {
+  padding-top: 8rem;
+  padding-bottom: 17rem;
+  margin-right: 40rem;
+  margin-left: 40rem;
+}
+.login-page input {
+  width: 20rem;
+  height: 3rem;
+}
+.login-page label {
+  font-size: xx-large
+}
