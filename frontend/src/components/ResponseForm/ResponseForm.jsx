@@ -122,7 +122,7 @@ const ResponseForm = (props) => {
     setSolution("");
   }
     return (
-      <div>
+      <div className="response">
         <div className="container-display">
           <div className="resident-box">
             <form action="/action_page.php" onSubmit={sendEmail}>
@@ -197,13 +197,13 @@ const ResponseForm = (props) => {
               </div>
             </form>{" "}
           </div>
-          <div style={{ marginTop: "2rem" }}>
+          <div style={{ marginTop: "7rem" }}>
             {/* REDEFINING THE CURRENT VALUE OF TICKETS TO EQUAL THE CURRENT TICKET */}
             <DisplayWorkorders tickets={currentWorkorder} />{" "}
             <div>
               <Link to="/">
-                <div style={{ marginLeft: "21rem" }}>
-                  <button
+                <div style={{ marginLeft: "14rem" }}>
+                  <button style={{backgroundColor: "#e3b23c"}}
                     className="button"
                     onClick={() => props.getAllTickets()}
                   >
