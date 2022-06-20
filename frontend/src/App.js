@@ -67,7 +67,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/completed" element={<DisplayCompleted user={user} token={token} tickets = {tickets}/>}/>
+        <Route path="/completed" element={<DisplayCompleted user={user} token={token} getAllTickets={getAllTickets} tickets = {tickets}/>}/>
       </Routes>
       <Footer />
   

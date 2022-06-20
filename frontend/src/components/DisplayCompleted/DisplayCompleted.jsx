@@ -19,7 +19,23 @@ const DisplayCompleted = (props) => {
       console.log(error.message);
     }
   }
-
+  async function deleteTicket(id) {
+    try {
+      let choice = prompt(
+        "Would you like to delete this ticket?"
+      ).toLowerCase();
+      if (choice === "yes") {
+        await axios.delete(`http://127.0.0.1:8000/api/workorders/${id}/`, {
+          headers: {
+            Authorization: "Bearer " + props.token,
+          },
+        });
+        props.getAllTickets();
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   return (
     <div>
       <h1>Completed Tickets</h1>
@@ -77,6 +93,14 @@ const DisplayCompleted = (props) => {
                       Status:{" "}
                       <small className="text-muted"> {order.status}</small>
                     </h4>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => deleteTicket(order.id)}
+                      className="button"
+                    >
+                      Delete
+                    </button>
                   </li>
                 </ul>
               </div>
