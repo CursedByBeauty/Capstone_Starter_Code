@@ -30,7 +30,7 @@ def get_all_workorders(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'PUT','DELETE'])
 @permission_classes([IsAuthenticated])
 def workorder_details(request,pk):
     # GETTING A WORKORDER BY THE PK
@@ -44,6 +44,9 @@ def workorder_details(request,pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status.HTTP_202_ACCEPTED)
+    elif request.method == 'DELETE':
+        workorder.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['PATCH'])
 @permission_classes([AllowAny])
