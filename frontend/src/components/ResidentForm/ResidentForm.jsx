@@ -46,7 +46,7 @@ const ResidentForm = (props) => {
   }
 
   return (
-    <div>
+    <div className="around-resident-box">
       <div className="resident-box">
         <form action="/action_page.php" onSubmit={handleClick}>
           <label>Unit</label>

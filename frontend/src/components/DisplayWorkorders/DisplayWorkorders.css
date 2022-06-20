@@ -8,6 +8,7 @@ li {
     display:grid;
     grid-template-areas: "left right";
     margin-right: 1rem;
+    padding-bottom: 18.5rem;
 }
 h1 {
     display:flex;
