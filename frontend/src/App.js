@@ -43,7 +43,7 @@ function App() {
 
   return (
     <div className="page">
-      <Navbar/>
+      <Navbar tickets={tickets} setTickets={setTickets} getAllTickets = {getAllTickets}/>
       <Routes>
         <Route
           path="/"
