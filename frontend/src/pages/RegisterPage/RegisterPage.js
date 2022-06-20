@@ -10,7 +10,7 @@ const RegisterPage = () => {
     password: "",
     firstName: "",
     lastName: "",
-    role: ""
+    role: "",
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
@@ -18,69 +18,79 @@ const RegisterPage = () => {
   );
 
   return (
-    <div className="container">
-      <form className="form" onSubmit={handleSubmit}>
-        <label>
-          Username:{" "}
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          First Name:{" "}
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Last Name:{" "}
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Email:{" "}
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Password:{" "}
-          <input
-            type="text"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>Role: 
-          <select
-          name="role"
-          onChange={handleInputChange}>
-            <option>Choose Here</option>
-            <option value="Management">Management</option>
-            <option value="Maintenance">Maintenance</option>
-            <option value="Resident">Resident</option>
-          </select>
-        </label>
-        <p style={{ fontSize: "12px" }}>
-          NOTE: Make this an uncommon password with characters, numbers, and
-          special characters!
-        </p>
-        <button>Register!</button>
-      </form>
+    <div className="register">
+      <div className="login-page">
+        <div className="resident-box">
+          <form
+            className="form"
+            action="/action_page.php"
+            onSubmit={handleSubmit}
+          >
+            <label>Username: </label>
+            <input
+              type="text"
+              name="username"
+              className="resident-form"
+              value={formData.username}
+              onChange={handleInputChange}
+            />
+
+            <label>First Name: </label>
+            <input
+              type="text"
+              name="firstName"
+              className="resident-form"
+              value={formData.firstName}
+              onChange={handleInputChange}
+            />
+
+            <label>Last Name: </label>
+            <input
+              type="text"
+              name="lastName"
+              className="resident-form"
+              value={formData.lastName}
+              onChange={handleInputChange}
+            />
+
+            <label>Email: </label>
+            <input
+              type="text"
+              name="email"
+              className="resident-form"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+
+            <label>Password: </label>
+            <input
+              type="text"
+              name="password"
+              className="resident-form"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+
+            <label>Role: </label>
+            <select
+              className="resident-form"
+              name="role"
+              onChange={handleInputChange}
+            >
+              <option>Choose Here</option>
+              <option value="Management">Management</option>
+              <option value="Maintenance">Maintenance</option>
+              <option value="Resident">Resident</option>
+            </select>
+
+            <p style={{ fontSize: "12px" }}>
+              NOTE: Make this an uncommon password with characters, numbers, and
+              special characters!
+            </p>
+            <button className="button">Register!</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

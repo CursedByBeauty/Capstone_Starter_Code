@@ -15,3 +15,18 @@
 .login-page label {
   font-size: xx-large
 }
+
+.register .login-page {
+  padding-top: 4rem;
+  margin-right: 20rem;
+  margin-left: 20rem
+}
+.register .login-page select {
+  width: 30rem;
+}
+.register .login-page input {
+  width: 30rem;
+}
+.register .login-page button {
+  width: 30rem;
+}
