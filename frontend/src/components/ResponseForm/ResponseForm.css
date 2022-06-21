@@ -20,8 +20,11 @@ form {
     justify-content: center;
 }
 .response {
-    margin-left: 8rem;
+    margin-left: 13rem;
 }
 .resident-box h2 {
     text-align: center
+}
+.response .container-display {
+    padding-bottom: 0rem;
 }
