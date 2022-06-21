@@ -21,15 +21,15 @@ const Navbar = (props) => {
         return true;
       } else if (ticket.unit.toString() === search) {
         return true;
-      } else if (ticket.subject.toLowerCase() === search.toLowerCase()) {
+      } else if (ticket.subject.toLowerCase().includes(search.toLowerCase())) {
         return true;
-      } else if (ticket.comments.includes(search.toLowerCase())) {
+      } else if (ticket.comments.toLowerCase().includes(search.toLowerCase())) {
         return true;
-      } else if (ticket.entry.toLowerCase() === search.toLowerCase()) {
+      } else if (ticket.entry.toLowerCase().includes(search.toLowerCase())) {
         return true;
       } else if (
-        ticket.priority.toLowerCase() === search[0].toLowerCase() ||
-        ticket.status.toLowerCase() === search[0].toLowerCase()
+        ticket.priority.toLowerCase().includes(search[0].toLowerCase()) ||
+        ticket.status.toLowerCase().includes(search[0].toLowerCase())
       ) {
         return true;
       }
