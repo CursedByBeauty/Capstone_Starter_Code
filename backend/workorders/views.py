@@ -15,7 +15,7 @@ def get_all_workorders(request):
 
     if request.method == 'GET':
         resident = Workorders.objects.filter(resident__id = request.user.id)
-        if resident:
+        if resident and request.user.role == "Resident":
             serializer = WorkorderSerializers(resident, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         elif request.user.role == "Maintenance" or request.user.role == "Management":
